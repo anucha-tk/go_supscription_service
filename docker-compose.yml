@@ -13,12 +13,25 @@ services:
     env_file:
       - .env
     volumes:
-      - postgres_go_sub_service_data:/var/lib/postgresql/data
+      - ./db-data/postgres/:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - go-sub-service-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - ./db-data/redis/:/data
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    restart: always
 networks:
   go-sub-service-network:
     driver: bridge
-volumes:
-  postgres_go_sub_service_data:

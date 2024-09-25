@@ -1,6 +1,6 @@
-postgres-start:
+docker-start:
 	docker compose up -d
-postgres-stop:
+docker-stop:
 	docker compose stop
-postgres-down:
+docker-down:
 	docker compose down
